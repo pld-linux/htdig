@@ -194,7 +194,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README htdoc
+%doc README htdoc
 %dir /var/lib/%{name}
 %attr(755,root,root) %{cgidir}/*
 %attr(755,root,root) %{_bindir}/*
