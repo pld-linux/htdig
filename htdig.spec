@@ -9,7 +9,7 @@ Group(pl):	Sieciowe/Narzêdzia
 Source:		http://www.htdig.org/files/%{name}-%{version}.tar.gz
 URL:		http://www.htdig.org/
 Prereq:		webserver
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The ht://Dig system is a complete world wide web indexing and searching
