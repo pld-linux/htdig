@@ -1,0 +1,16 @@
+--- htdig-3.2.0b4-20030413.old/db/configure.in	2003-02-02 09:13:10.000000000 +0100
++++ htdig-3.2.0b4-20030413/db/configure.in	2004-11-21 18:17:18.000000000 +0100
+@@ -9,12 +9,12 @@
+ AC_SUBST(MINOR_VERSION)
+ MICRO_VERSION=[`expr $VERSION : '[0-9][0-9]*\.[0-9][0-9]*\.\([0-9][0-9]*\)'`]
+ AC_SUBST(MICRO_VERSION)
++AC_CONFIG_AUX_DIR(../)
+ AM_INIT_AUTOMAKE([mifluz], $VERSION, nosubst)
+ AC_PREREQ(2.13)
+ 
+ AM_CONFIG_HEADER(db_config.h)
+ 
+-AC_CONFIG_AUX_DIR(../)
+ AC_PROG_MAKE_SET
+ 
+ AM_PROG_LIBTOOL
