@@ -1,17 +1,30 @@
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(pl):	System indeksowania i przeszukiwania www dla ma³ych domen i intranetu
 Name:		htdig
-Version:	3.2.0b2
-Release:	2
+Version:	3.2.0b3
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Group(de):	Netzwerkwesen/Werkzeuge
+Group(cs):	Sí»ové/Utility
+Group(da):	Netværks/Værktøj
+Group(de):	Netzwerkwesen/Dienstprogramme
 Group(es):	Red/Utilitarios
+Group(fr):	Réseau/Utilitaires
+Group(is):	Net/Tól
+Group(it):	Rete/Utility
+Group(no):	Nettverks/Verktøy
 Group(pl):	Sieciowe/Narzêdzia
 Group(pt_BR):	Rede/Utilitários
+Group(pt):	Rede/Utilidades
+Group(ru):	óÅÔØ/õÔÉÌÉÔÙ
+Group(sl):	Omre¾ni/Pripomoèki
+Group(sv):	Nätverk/Verktyg
+Group(uk):	íÅÒÅÖÁ/õÔÉÌ¦ÔÉ
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
 URL:		http://www.htdig.org/
+BuildRequiers:	zlib-devel
+BuildRequires:	libstdc++-devel
 PreReq:		webserver
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,12 +57,21 @@ HTTP 1.0
 Summary:	Include files and libraries for htdig
 Summary(pl):	Pliki nag³ówkowe dla htdig
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vıvojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(is):	Şróunartól/Ağgerğasöfn
+Group(it):	Sviluppo/Librerie
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sl):	Razvoj/Knji¾nice
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
@@ -72,12 +94,21 @@ This package contains devlopment files.
 Summary:	htdig static libraries
 Summary(pl):	Biblioteki statyczne htdig
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(cs):	Vıvojové prostøedky/Knihovny
+Group(da):	Udvikling/Biblioteker
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(is):	Şróunartól/Ağgerğasöfn
+Group(it):	Sviluppo/Librerie
+Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
+Group(no):	Utvikling/Bibliotek
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(sl):	Razvoj/Knji¾nice
+Group(sv):	Utveckling/Bibliotek
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
@@ -101,29 +132,22 @@ This package contains static libraries of htdig.
 %patch -p1
 
 %build
-CFLAGS="%{rpmcflags}"
-LDFLAGS="%{rpmldflags}"
-export CFLAGS LDFLAGS
-
-./configure %{_target_platform} \
-        --prefix=%{_prefix} \
-        --exec_prefix=%{_prefix} \
+%configure2_13 \
         --libexec=%{_libdir} \
-        --libdir=%{_libdir} \
-        --mandir=%{_mandir} \
         --sysconfdir=%{_sysconfdir}/%{name} \
         --with-image-dir=/home/httpd/html/%{name} \
         --with-cgi-bin-dir=/home/httpd/cgi-bin \
         --with-search-dir=/home/httpd/html \
         --with-config-dir=%{_sysconfdir}/%{name} \
-        --localstatedir=/var/lib
+        --localstatedir=%{_var}/lib
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install-strip
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/cron.daily
 ln -sf ../..%{_bindir}/rundig \
@@ -160,8 +184,10 @@ fi
 %dir /var/lib/%{name}
 %attr (755,nobody,nobody) /home/httpd/cgi-bin/*
 %attr (755,root,root) %{_bindir}/*
-%attr (755,root,root) %{_libdir}/%{name}/*so
-%attr (755,root,root) %{_libdir}/%{name}/*la
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/mifluz
+%attr (755,root,root) %{_libdir}/*/*.so
+%attr (755,root,root) %{_libdir}/*/*.la
 /home/httpd/html/%{name}/*
 %{_datadir}/%{name}/*
 %config(noreplace) %{_sysconfdir}/htdig/*
@@ -170,8 +196,9 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/%{name}/*
+%dir %{_includedir}/*
+%{_includedir}/*/*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/*.a
+%{_libdir}/*/*.a
