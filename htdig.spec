@@ -1,7 +1,7 @@
 %define	snap	20030413
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(es):	Indexador y máquina de búsqueda para web
-Summary(pl):	System indeksowania i przeszukiwania www dla ma³ych domen i intranetu
+Summary(pl):	System indeksowania i przeszukiwania WWW dla ma³ych domen i intranetu
 Summary(pt_BR):	Indexador e máquina de procura para web
 Summary(ru):	éÎÄÅËÓÉÒÕÀİÁÑ ÓÉÓÔÅÍÁ web-ĞÏÉÓËÁ ÄÌÑ ÎÅÂÏÌØÛÉÈ ÄÏÍÅÎÏ× ÉÌÉ intranet
 Summary(uk):	¶ÎÄÅËÓÕÀŞÁ ÓÉÓÔÅÍÁ web-ĞÏÛÕËÕ ÄÌÑ ÎÅ×ÅÌÉËÉÈ ÄÏÍÅÎ¦× ŞÉ intranet
@@ -62,14 +62,14 @@ This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
 
 %description -l pl
-ht://Dig jest kompletnym systemem indeksuj±cym i przeszukuj±cym www
+ht://Dig jest kompletnym systemem indeksuj±cym i przeszukuj±cym WWW
 dla ma³ych domen oraz intranetu. System nie zosta³ opracowany jako
 wielki system typu Lycos, Infoseek WebCrawler i AltaVista. Natomiast
 nadaje siê do zastosowania w pojedynczej firmie, kampusie lub
-jakiejkolwiek stronie www.
+jakiejkolwiek stronie WWW.
 
-W odró¿nieniu do innych bazuj±cych na WAIS-sie lub serwerch www
-systemach, ht://Dig mo¿e ³±czyæ kilka serwerów www w jednym miejscu.
+W odró¿nieniu do innych bazuj±cych na WAIS-sie lub serwerch WWW
+systemach, ht://Dig mo¿e ³±czyæ kilka serwerów WWW w jednym miejscu.
 Typ serwera nie ma znaczenia, dopóki pracuje on zgodnie z protoko³em
 HTTP 1.0
 Ta wersja ht://Dig zosta³a za³atana aby obs³ugiwaæ polskie znaki
