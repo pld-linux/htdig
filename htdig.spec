@@ -16,6 +16,7 @@ URL:		http://www.htdig.org/
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
+BuildRequires:	automake
 PreReq:		apache
 Requires(post):	awk
 Requires(post):	fileutils
@@ -144,6 +145,7 @@ Statyczne biblioteki htdig.
 %patch1 -p0
 
 %build
+install %{_datadir}/automake/config.* .
 %configure2_13 \
 	--libexec=%{_libdir} \
 	--sysconfdir=%{_sysconfdir} \
