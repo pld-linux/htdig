@@ -70,16 +70,16 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # Only run this if installing for the first time
 if [ "$1" = 1 ]; then
-	for i in `grep '^ServerName' /etc/httpd/conf/httpd.conf | awk '{print $2}'`; do echo -n http://$i/; echo -n " "; done > /tmp/htdig.tmp
+	for i in `grep '^ServerName' /etc/httpd/conf/httpd.conf | sort -u | awk '{print $2}'`; do echo -n http://$i/; echo -n " "; done > /tmp/htdig.tmp
 	SERVERNAMES="`cat /tmp/htdig.tmp`"
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="`hostname -f`"
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
-	SERVERNAME=`grep '^ServerName' /etc/httpd/conf/httpd.conf | awk '{print $2}'| uniq -d`
+	SERVERNAME=`grep '^ServerName' /etc/httpd/conf/httpd.conf | uniq -d | awk '{print $2}'`
 	grep -v -e local_urls -e local_user_urls -e start_url /etc/htdig/htdig.conf > /tmp/htdig.tmp
 	mv /tmp/htdig.tmp /etc/htdig/htdig.conf
 	echo "start_url:	$SERVERNAMES
 local_urls:	$SERVERNAMES
-local_user_urls:	$SERVERNAME/home/,/public_html/" >> /etc/htdig/htdig.conf
+local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> /etc/htdig/htdig.conf
 
 fi
 
