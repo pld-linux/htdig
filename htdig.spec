@@ -177,8 +177,7 @@ ln -sf %{_defaultdocdir}/%{name}-%{version} $RPM_BUILD_ROOT%{htdigdir}/htdoc
 
 for file in $RPM_BUILD_ROOT%{cgidir}/*; do
   file=$(basename "$file")
-  mv -f $RPM_BUILD_ROOT%{cgidir}/${file} $RPM_BUILD_ROOT%{_bindir}
-  ln -sf %{_bindir}/${file} $RPM_BUILD_ROOT%{cgidir}/${file}
+  cp -f $RPM_BUILD_ROOT%{cgidir}/${file} $RPM_BUILD_ROOT%{_bindir}/${file}
 done
 
 %clean
