@@ -169,6 +169,7 @@ ln -sf %{_defaultdocdir}/%{name}-%{version} \
 	$RPM_BUILD_ROOT%{htdigdir}/htdoc
 
 install -d $RPM_BUILD_ROOT/var/lib/%{name}
+install htsearch/qtest $RPM_BUILD_ROOT/${_bindir}/qtest
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -196,14 +197,14 @@ fi
 %defattr(644,root,root,755)
 %doc README htdoc
 %dir /var/lib/%{name}
-%attr(755,root,root) %{cgidir}/*
+%attr(755,root,root) %{cgidir}/ht*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/mifluz
 %attr(755,root,root) %{_libdir}/*/*.so
 %{_libdir}/*/*.la
 %dir %{htdigdir}
-%{htdigdir}/%{name}/*
+%{htdigdir}/*
 %{_datadir}/%{name}/*
 %attr(750,root,http) %dir %{_sysconfdir}
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
