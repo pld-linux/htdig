@@ -76,19 +76,10 @@ Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
-The ht://Dig system is a complete world wide web indexing and
-searching system for a small domain or intranet. This system is not
-meant to replace the need for powerful internet-wide search systems
-like Lycos, Infoseek, Webcrawler and AltaVista. Instead it is meant to
-cover the search needs for a single company, campus, or even a
-particular sub section of a web site.
+This package contains devlopment files for htdig.
 
-As opposed to some WAIS-based or web-server based search engines,
-ht://Dig can span several web servers at a site. The type of these
-different web servers doesn't matter as long as they understand the
-HTTP 1.0 protocol.
-
-This package contains devlopment files.
+%description devel -l pl
+Ten pakiet zawiera pliki nagЁСwkowe htdig.
 
 %package static
 Summary:	htdig static libraries
@@ -113,19 +104,10 @@ Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
-The ht://Dig system is a complete world wide web indexing and
-searching system for a small domain or intranet. This system is not
-meant to replace the need for powerful internet-wide search systems
-like Lycos, Infoseek, Webcrawler and AltaVista. Instead it is meant to
-cover the search needs for a single company, campus, or even a
-particular sub section of a web site.
-
-As opposed to some WAIS-based or web-server based search engines,
-ht://Dig can span several web servers at a site. The type of these
-different web servers doesn't matter as long as they understand the
-HTTP 1.0 protocol.
-
 This package contains static libraries of htdig.
+
+%description static -l pl
+Statyczne biblioteki htdig.
 
 %prep
 %setup -q
@@ -133,21 +115,20 @@ This package contains static libraries of htdig.
 
 %build
 %configure2_13 \
-        --libexec=%{_libdir} \
-        --sysconfdir=%{_sysconfdir}/%{name} \
-        --with-image-dir=/home/httpd/html/%{name} \
-        --with-cgi-bin-dir=/home/httpd/cgi-bin \
-        --with-search-dir=/home/httpd/html \
-        --with-config-dir=%{_sysconfdir}/%{name} \
-        --localstatedir=%{_var}/lib
+	--libexec=%{_libdir} \
+	--sysconfdir=%{_sysconfdir}/%{name} \
+	--with-image-dir=/home/httpd/html/%{name} \
+	--with-cgi-bin-dir=/home/httpd/cgi-bin \
+	--with-search-dir=/home/httpd/html \
+	--with-config-dir=%{_sysconfdir}/%{name} \
+	--localstatedir=%{_var}/lib
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/cron.daily
 ln -sf ../..%{_bindir}/rundig \
@@ -155,7 +136,7 @@ ln -sf ../..%{_bindir}/rundig \
 
 install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
 ln -sf ../../../..%{_defaultdocdir}/%{name}-%{version} \
-        $RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
+	$RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
 
 install -d $RPM_BUILD_ROOT/var/lib/%{name}
 
