@@ -47,7 +47,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--bindir=/usr/sbin \
 	--libexec=/usr/lib \
 	--libdir=/usr/lib \
-	--mandir=/usr/man \
+	--mandir=%{_mandir} \
 	--sysconfdir=/etc/htdig \
 	--localstatedir=/var/lib/htdig \
 	--with-image-dir=/home/httpd/html/htdig \
