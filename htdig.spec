@@ -5,6 +5,7 @@ Version:	3.2.0b2
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
+Group(de):	Netzwerkwesen/Werkzeuge
 Group(pl):	Sieciowe/Narzêdzia
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
@@ -38,8 +39,10 @@ Typ serwera nie ma znaczenia, dopóki pracuje on zgodnie z protoko³em
 HTTP 1.0
 
 %package devel
-Summary:	include files and libraries for htdig
+Summary:	Include files and libraries for htdig
+Summary(pl):	Pliki nag³ówkowe dla htdig
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -61,7 +64,9 @@ This package contains devlopment files.
 
 %package static
 Summary:	htdig static libraries
+Summary(pl):	Biblioteki statyczne htdig
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}-devel
@@ -86,8 +91,8 @@ This package contains static libraries of htdig.
 %patch -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS"
-LDFLAGS="-s"
+CFLAGS="%{rpmcflags}"
+LDFLAGS="%{rpmldflags}"
 export CFLAGS LDFLAGS
 
 ./configure %{_target_platform} \
@@ -111,11 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install-strip
 
 install -d $RPM_BUILD_ROOT/etc/cron.daily
-ln -s ../..%{_prefix}/bin/rundig \
+ln -sf ../..%{_bindir}/rundig \
 	$RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 
 install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
-ln -s ../../../..%{_defaultdocdir}/%{name}-%{version} \
+ln -sf ../../../..%{_defaultdocdir}/%{name}-%{version} \
         $RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
 
 install -d $RPM_BUILD_ROOT/var/lib/%{name}
@@ -132,7 +137,7 @@ if [ "$1" = 1 ]; then
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
 	SERVERNAME=`grep '^ServerName' /etc/httpd/httpd.conf | uniq -d | awk '{print $2}'`
 	grep -v -e local_urls -e local_user_urls -e start_url /etc/htdig/htdig.conf > /tmp/htdig.tmp
-	mv /tmp/htdig.tmp /etc/htdig/htdig.conf
+	mv -f /tmp/htdig.tmp /etc/htdig/htdig.conf
 	echo "start_url:$SERVERNAMES
 local_urls:		$SERVERNAMES
 local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> /etc/htdig/htdig.conf
@@ -144,11 +149,11 @@ fi
 %doc COPYING README htdoc
 %dir /var/lib/%{name}
 %attr (755,nobody,nobody) /home/httpd/cgi-bin/*
-%attr (755,root,root) %{_prefix}/bin/*
+%attr (755,root,root) %{_bindir}/*
 %attr (755,root,root) %{_libdir}/%{name}/*so
 %attr (755,root,root) %{_libdir}/%{name}/*la
 /home/httpd/html/%{name}/*
-%{_prefix}/share/%{name}/*
+%{_datadir}/%{name}/*
 %config(noreplace) %{_sysconfdir}/htdig/*
 %config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
 %config(missingok) %{_sysconfdir}/cron.daily/htdig-dbgen
