@@ -20,7 +20,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
-BuildRequires:	libtool
+BuildRequires:	libtool >= 1.5-5
 Requires(post):	awk
 Requires(post):	fileutils
 Requires(post):	grep
