@@ -2,7 +2,7 @@ Summary:	A web indexing and searching system for a small domain or intranet
 Summary(pl):	System indeksowania i przeszukiwania www dla ma³ych domen i intranetu
 Name:		htdig
 Version:	3.2.0b2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Group(de):	Netzwerkwesen/Werkzeuge
@@ -69,7 +69,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}-devel
+Requires:	%{name}-devel = %{version}
 
 %description static
 The ht://Dig system is a complete world wide web indexing and
