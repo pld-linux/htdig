@@ -44,7 +44,7 @@ znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr \
-	--bindir=/usr/sbin \
+	--bindir=%{_sbindir} \
 	--libexec=/usr/lib \
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir} \
@@ -60,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make INSTALL_ROOT=$RPM_BUILD_ROOT install-strip
 install -d $RPM_BUILD_ROOT/etc/cron.daily
-ln -s ../../usr/sbin/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
+ln -s ../..%{_sbindir}/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
 ln -s ../../../../usr/doc/htdig-%{name}-%{version} \
         $RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
@@ -84,7 +84,7 @@ fi
 %defattr(644,root,root,755)
 %doc CONFIG README htdoc/*
 %attr (640,root,root) %config /etc/htdig/htdig.conf
-%attr (755,root,root) %config /usr/sbin/*
+%attr (755,root,root) %config %{_sbindir}/*
 %config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
 /var/lib/htdig
