@@ -196,7 +196,7 @@ if [ "$1" = 1 ]; then
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="`hostname -f`"
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
 	SERVERNAME=`grep '^ServerName' /etc/httpd/httpd.conf | uniq -d | awk '{print $2}'`
-	grep -v -e local_urls -e local_user_urls -e start_url %{_sysconfdir}/htdig.conf > %{_syscofndir}/htdig.conf.tmp
+	grep -v -e local_urls -e local_user_urls -e start_url %{_sysconfdir}/htdig.conf > %{_sysconfdir}/htdig.conf.tmp
 	mv -f %{_sysconfdir}/htdig.conf.tmp %{_sysconfdir}/htdig.conf
 	echo "start_url:$SERVERNAMES
 local_urls:		$SERVERNAMES
