@@ -172,12 +172,12 @@ fi
 %defattr(644,root,root,755)
 %doc COPYING README htdoc
 %dir /var/lib/%{name}
-%attr (755,nobody,nobody) /home/httpd/cgi-bin/*
-%attr (755,root,root) %{_bindir}/*
+%attr(755,nobody,nobody) /home/httpd/cgi-bin/*
+%attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/mifluz
-%attr (755,root,root) %{_libdir}/*/*.so
-%attr (755,root,root) %{_libdir}/*/*.la
+%attr(755,root,root) %{_libdir}/*/*.so
+%{_libdir}/*/*.la
 %dir /home/httpd/html/%{name}
 /home/httpd/html/%{name}/*
 %{_datadir}/%{name}/*
