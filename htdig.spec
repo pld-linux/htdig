@@ -27,6 +27,7 @@ Requires(post):	grep
 Requires(post):	textutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_localstatedir	/var/lib
 %define		_sysconfdir	/etc/htdig
 %define		cgidir		/home/services/httpd/cgi-bin
 %define		htmldir		/home/services/httpd/html
@@ -119,13 +120,13 @@ This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
 
 %package devel
-Summary:	Include files and libraries for htdig
+Summary:	Header files for htdig
 Summary(pl):	Pliki nag³ówkowe dla htdig
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
-This package contains devlopment files for htdig.
+This package contains development files for htdig.
 
 %description devel -l pl
 Ten pakiet zawiera pliki nag³ówkowe htdig.
@@ -134,7 +135,7 @@ Ten pakiet zawiera pliki nag³ówkowe htdig.
 Summary:	htdig static libraries
 Summary(pl):	Biblioteki statyczne htdig
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static libraries of htdig.
@@ -149,36 +150,36 @@ Statyczne biblioteki htdig.
 %build
 %{__libtoolize}
 %{__aclocal}
-%{__automake}
 %{__autoconf}
+%{__automake}
 cd db
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__automake}
 cd ..
 %configure \
 	--libexec=%{_libdir} \
-	--sysconfdir=%{_sysconfdir} \
 	--with-image-dir=%{htdigdir} \
 	--with-cgi-bin-dir=%{cgidir} \
 	--with-search-dir=%{htmldir} \
-	--with-config-dir=%{_sysconfdir} \
-	--localstatedir=%{_var}/lib
+	--with-config-dir=%{_sysconfdir}
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/cron.daily,/var/lib/%{name},%{htdigdir}}
+install -d $RPM_BUILD_ROOT{/etc/cron.daily,%{_localstatedir}/%{name},%{htdigdir}}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf %{_bindir}/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 ln -sf %{_defaultdocdir}/%{name}-%{version} $RPM_BUILD_ROOT%{htdigdir}/htdoc
 
 for file in $RPM_BUILD_ROOT%{cgidir}/*; do
-  file=$(basename "$file")
-  cp -f $RPM_BUILD_ROOT%{cgidir}/${file} $RPM_BUILD_ROOT%{_bindir}/${file}
+	file=$(basename "$file")
+	cp -f $RPM_BUILD_ROOT%{cgidir}/${file} $RPM_BUILD_ROOT%{_bindir}/${file}
 done
 
 %clean
@@ -208,15 +209,13 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README htdoc
-%dir /var/lib/%{name}
-%attr(755,root,root) %{cgidir}/ht*
 %attr(755,root,root) %{_bindir}/*
+%dir %{_localstatedir}/%{name}
+%attr(755,root,root) %{cgidir}/ht*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/mifluz
-%attr(755,root,root) %{_libdir}/*/*.so
-%{_libdir}/*/*.la
-%dir %{htdigdir}
-%{htdigdir}/*
+%attr(755,root,root) %{_libdir}/*/*-3.2.0.so
+%{htdigdir}
 %{_datadir}/%{name}
 %attr(750,root,http) %dir %{_sysconfdir}
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
@@ -225,8 +224,9 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_includedir}/*
-%{_includedir}/*/*
+%attr(755,root,root) %{_libdir}/*/*[!0].so
+%{_libdir}/*/*.la
+%{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
