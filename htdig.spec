@@ -1,3 +1,4 @@
+%define	snap	20030413
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(es):	Indexador y mАquina de bЗsqueda para web
 Summary(pl):	System indeksowania i przeszukiwania www dla maЁych domen i intranetu
@@ -5,14 +6,13 @@ Summary(pt_BR):	Indexador e mАquina de procura para web
 Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
 Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
 Name:		htdig
-Version:	3.2.0b3
-Release:	4
+Version:	3.2.0b4
+Release:	0.%{snap}.1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
-Patch0:		%{name}-glibc22.patch
-Patch1:		%{name}-pl-dont-mix-up.patch
-Patch2:		%{name}-ac_am_lt.patch
+# 3.2.0b3 has security bugs, so for now we are using snapshot
+Source0:	http://www.htdig.org/files/snapshots/%{name}-%{version}-%{snap}.tar.gz
+Patch0:		%{name}-pl-dont-mix-up.patch
 URL:		http://www.htdig.org/
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
@@ -20,7 +20,6 @@ BuildRequires:	zlib-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
-PreReq:		apache
 Requires(post):	awk
 Requires(post):	fileutils
 Requires(post):	grep
@@ -143,10 +142,8 @@ This package contains static libraries of htdig.
 Statyczne biblioteki htdig.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p0
-%patch2 -p1
+%setup -q -n %{name}-%{version}-%{snap}
+%patch0 -p0
 
 %build
 %{__libtoolize}
@@ -171,21 +168,18 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{/etc/cron.daily,/var/lib/%{name},%{htdigdir}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/cron.daily
-ln -sf %{_bindir}/rundig \
-	$RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
+ln -sf %{_bindir}/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
+ln -sf %{_defaultdocdir}/%{name}-%{version} $RPM_BUILD_ROOT%{htdigdir}/htdoc
 
-install -d $RPM_BUILD_ROOT%{htdigdir}
-ln -sf %{_defaultdocdir}/%{name}-%{version} \
-	$RPM_BUILD_ROOT%{htdigdir}/htdoc
-
-install -d $RPM_BUILD_ROOT/var/lib/%{name}
-install htsearch/qtest $RPM_BUILD_ROOT/${_bindir}/qtest
-
-ln -s %{cgidir}/htsearch $RPM_BUILD_ROOT%{_bindir}/htsearch
+for file in $RPM_BUILD_ROOT%{cgidir}/*; do
+  file=$(basename "$file")
+  mv -f $RPM_BUILD_ROOT%{cgidir}/${file} $RPM_BUILD_ROOT%{_bindir}
+  ln -sf %{_bindir}/${file} $RPM_BUILD_ROOT%{cgidir}/${file}
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -193,6 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # Only run this if installing for the first time
 if [ "$1" = 1 ]; then
+  if [ -f /etc/httpd/httpd.conf ]; then
 	umask 027
 	for i in `grep '^ServerName' /etc/httpd/httpd.conf | sort -u | awk '{print $2}'`; do
 		echo -n "http://$i/ "
@@ -207,6 +202,7 @@ if [ "$1" = 1 ]; then
 	echo "start_url:$SERVERNAMES
 local_urls:		$SERVERNAMES
 local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> %{_sysconfdir}/htdig.conf
+  fi
 fi
 
 %files
