@@ -90,39 +90,3 @@ fi
 /var/lib/htdig
 %attr(755,root,root) /home/httpd/cgi-bin/htsearch
 /home/httpd/html/htdig
-
-%changelog
-* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [3.1.1-2]
-- added "Prereq: webserwer",
-- added -q %setup parameter,
-- added noreplace to %config for /home/httpd/html/search.html.
-
-* Thu Mar 11 1999 Konrad Stêpieñ <konrad@interdata.com.pl>
-- added pl translation
-- added full %attr macros
-- fix problem witch /home/httpd/html/htdig/htdoc dir
-
-* Wed Feb 17 1999 Gilles Detillieux <grdetil@scrc.umanitoba.ca>
-  - updated to version 3.1.1 final release
-  - updated to release 1, included patch for htsearch parser bug
-
-* Thu Feb  4 1999 Gilles Detillieux <grdetil@scrc.umanitoba.ca>
-  - put web stuff back in /home/httpd/html & /home/httpd/cgi-bin, so it can
-	go over a standard Apache installation on Red Hat
-  - cleaned up %install to make use of new features
-
-* Thu Feb 4 1999 Ric Klaren <klaren@telin.nl>
-  - changed buildroot stuff
-  - minor spec file fixes
-  - install web stuff in /home/httpd/htdig
-  - made rundig config file
-
-* Tue Sep 22 1998 Gilles Detillieux <grdetil@scrc.umanitoba.ca>
-  - Added local_urls stuff to generated htdig.conf file
-
-* Fri Sep 18 1998 Gilles Detillieux <grdetil@scrc.umanitoba.ca>
-  - Built the rpm from latest htdig source (3.1.0b1), using earlier
-    versions of rpms by Mihai Ibanescu <misa@dntis.ro> and Elliot Lee
-    <sopwith@cuc.edu> as a model, incorporating ideas from both.  I've
-    made the install locations as FSSTND compliant as I can think of.
