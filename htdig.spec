@@ -6,7 +6,7 @@ Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
 Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
 Name:		htdig
 Version:	3.2.0b3
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
@@ -178,6 +178,7 @@ fi
 %dir %{_libdir}/mifluz
 %attr (755,root,root) %{_libdir}/*/*.so
 %attr (755,root,root) %{_libdir}/*/*.la
+%dir /home/httpd/html/%{name}
 /home/httpd/html/%{name}/*
 %{_datadir}/%{name}/*
 %attr(750,root,http) %dir %{_sysconfdir}
