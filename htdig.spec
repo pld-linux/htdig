@@ -14,6 +14,7 @@ Group:		Networking/Utilities
 Source0:	http://www.htdig.org/files/snapshots/%{name}-%{version}-%{snap}.tar.gz
 # Source0-md5:	e69d64eaaf4c10742ba198daf641a27c
 Patch0:		%{name}-pl-dont-mix-up.patch
+Patch1:		%{name}-ac.patch
 URL:		http://www.htdig.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -146,6 +147,7 @@ Statyczne biblioteki htdig.
 %prep
 %setup -q -n %{name}-%{version}-%{snap}
 %patch0 -p0
+%patch1 -p1
 
 %build
 %{__libtoolize}
