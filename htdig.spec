@@ -36,7 +36,7 @@ ht://Dig mo¿e ³±czyæ kilka serwerów www w jednum miejscu. Typ serwera nie ma
 znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
 
 %prep
-%setup
+%setup -q
 %patch0 -p1
 %patch1 -p1
 
@@ -91,11 +91,11 @@ fi
 %attr(755,root,root) /home/httpd/cgi-bin/htsearch
 /home/httpd/html/htdig
 
-
 %changelog
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [3.1.1-2]
 - added "Prereq: webserwer",
+- added -q %setup parameter,
 - added noreplace to %config for /home/httpd/html/search.html.
 
 * Thu Mar 11 1999 Konrad Stêpieñ <konrad@interdata.com.pl>
