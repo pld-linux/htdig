@@ -23,7 +23,7 @@ Group(uk):	Мережа/Утил╕ти
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
 URL:		http://www.htdig.org/
-BuildRequiers:	zlib-devel
+BuildRequires:	zlib-devel
 BuildRequires:	libstdc++-devel
 PreReq:		webserver
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
