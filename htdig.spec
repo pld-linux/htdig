@@ -65,7 +65,7 @@ in iso-8859-2.
 ht://Dig jest kompletnym systemem indeksuj±cym i przeszukuj±cym www
 dla ma³ych domen oraz intranetu. System nie zosta³ opracowany jako
 wielki system typu Lycos, Infoseek WebCrawler i AltaVista. Natomiast
-nadeje siê do zastosowania w pojedyñczej firmie, kampusie lub
+nadaje siê do zastosowania w pojedynczej firmie, kampusie lub
 jakiejkolwiek stronie www.
 
 W odró¿nieniu do innych bazuj±cych na WAIS-sie lub serwerch www
