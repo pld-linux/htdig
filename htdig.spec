@@ -6,11 +6,12 @@ Release:	2
 Copyright:	GPL
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
-BuildRoot:	/tmp/%{name}-%{version}-root
 Source:		http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		htdig-conf.patch
 Patch1:		htdig-parser.patch
 URL:		http://www.htdig.org/
+Prereq:		webserwer
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 The ht://Dig system is a complete world wide web indexing and searching
@@ -94,6 +95,7 @@ fi
 %changelog
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [3.1.1-2]
+- added "Prereq: webserwer",
 - added noreplace to %config for /home/httpd/html/search.html.
 
 * Thu Mar 11 1999 Konrad Stêpieñ <konrad@interdata.com.pl>
