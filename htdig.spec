@@ -12,11 +12,14 @@ Group:		Networking/Utilities
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
 Patch1:		%{name}-pl-dont-mix-up.patch
+Patch2:		%{name}-ac_am_lt.patch
 URL:		http://www.htdig.org/
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	automake
+BuildRequires:	autoconf
+BuildRequires:	libtool
 PreReq:		apache
 Requires(post):	awk
 Requires(post):	fileutils
@@ -143,10 +146,19 @@ Statyczne biblioteki htdig.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 %build
-install %{_datadir}/automake/config.* .
-%configure2_13 \
+%{__libtoolize}
+%{__aclocal}
+%{__automake}
+%{__autoconf}
+cd db
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+cd ..
+%configure \
 	--libexec=%{_libdir} \
 	--sysconfdir=%{_sysconfdir} \
 	--with-image-dir=%{htdigdir} \
@@ -172,6 +184,8 @@ ln -sf %{_defaultdocdir}/%{name}-%{version} \
 
 install -d $RPM_BUILD_ROOT/var/lib/%{name}
 install htsearch/qtest $RPM_BUILD_ROOT/${_bindir}/qtest
+
+ln -s %{cgidir}/htsearch $RPM_BUILD_ROOT%{_bindir}/htsearch
 
 %clean
 rm -rf $RPM_BUILD_ROOT
