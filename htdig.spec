@@ -6,11 +6,12 @@ Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
 Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
 Name:		htdig
 Version:	3.2.0b3
-Release:	3
+Release:	4
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
+Patch1:		%{name}-pl-dont-mix-up.patch
 URL:		http://www.htdig.org/
 BuildRequires:	flex
 BuildRequires:	zlib-devel
@@ -31,7 +32,9 @@ particular sub section of a web site.
 As opposed to some WAIS-based or web-server based search engines,
 ht://Dig can span several web servers at a site. The type of these
 different web servers doesn't matter as long as they understand the
-HTTP 1.0 protocol.
+HTTP 1.0 protocol. 
+This version of ht://Dig has been patched for handling pl chars encoded 
+in iso-8859-2.
 
 %description -l es
 El ht://Dig es un sistema completo para indexaciСn y bЗsqueda en un
@@ -43,6 +46,9 @@ Diferentemente de sistemas de bЗsqueda basados en WAIS o servidores
 web el ht://Dig puede cubrir varios servidores web en una
 localizaciСn. El tipo de estos diferentes servidores web no interesa
 desde que entiendan el protocolo HTTP 1.0.
+This version of ht://Dig has been patched for handling pl chars encoded
+in iso-8859-2.
+
 
 %description -l pl
 ht://Dig jest kompletnym systemem indeksuj╠cym i przeszukuj╠cym www
@@ -55,6 +61,8 @@ W odrС©nieniu do innych bazuj╠cych na WAIS-sie lub serwerch www
 systemach, ht://Dig mo©e Ё╠czyФ kilka serwerСw www w jednym miejscu.
 Typ serwera nie ma znaczenia, dopСki pracuje on zgodnie z protokoЁem
 HTTP 1.0
+Ta wersja ht://Dig zostaЁa zaЁatana aby obsЁugiwaФ polskie znaki 
+zakodowane zgodnie z ISO-8859-2.
 
 %description -l pt_BR
 O ht://Dig И um sistema completo para indexaГЦo e busca em um domМnio
@@ -67,6 +75,9 @@ Diferentemente de sistemas de busca baseados em WAIS ou servidores web
 o ht://Dig pode cobrir vАrios servidores web em uma localizaГЦo. O
 tipo destes diferentes servidores web nЦo interessa desde que eles
 entendam o protocolo HTTP 1.0.
+This version of ht://Dig has been patched for handling pl chars encoded
+in iso-8859-2.
+
 
 %description -l ru
 Система ht://Dig является законченной системой индексирования и поиска
@@ -80,6 +91,9 @@ entendam o protocolo HTTP 1.0.
 или средствах веб-сервера, ht://Dig может обслуживать несколько
 веб-серверов в одном поисковом сайте. Типы этих различных веб-серверов
 значения не имеют, необходима всего лишь поддержка протокола HTTP 1.0.
+This version of ht://Dig has been patched for handling pl chars encoded
+in iso-8859-2.
+
 
 %description -l uk
 Система ht://Dig ╓ завершеною системою ╕ндексування та пошуку у
@@ -93,6 +107,8 @@ entendam o protocolo HTTP 1.0.
 засобах веб-серверу, ht://Dig може обслуговувати дек╕лька веб-сервер╕в
 в одному пошуковому сайт╕. Типи цих р╕зних веб-сервер╕в значення не
 мають, необх╕дна всього лише п╕дтримка протоколу HTTP 1.0.
+This version of ht://Dig has been patched for handling pl chars encoded
+in iso-8859-2.
 
 %package devel
 Summary:	Include files and libraries for htdig
@@ -120,7 +136,8 @@ Statyczne biblioteki htdig.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p0
 
 %build
 %configure2_13 \
