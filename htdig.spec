@@ -1,8 +1,8 @@
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(pl):	System indeksowania i przeszukiwania www dla ma³ych domen i intranetu
 Name:		htdig
-Version:	3.1.1
-Release:	2
+Version:	3.1.2
+Release:	1
 Copyright:	GPL
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
