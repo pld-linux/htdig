@@ -60,7 +60,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make INSTALL_ROOT=$RPM_BUILD_ROOT install-strip
+%{__make} INSTALL_ROOT=$RPM_BUILD_ROOT install-strip
 install -d $RPM_BUILD_ROOT/etc/cron.daily
 ln -s ../..%{_prefix}/local/%{name}/bin/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
