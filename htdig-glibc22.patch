@@ -1,0 +1,26 @@
+--- htdig-3.2.0b2/htcommon/HtWordList.h.glibc22	Wed Apr 12 00:53:19 2000
++++ htdig-3.2.0b2/htcommon/HtWordList.h	Tue Oct  3 13:45:29 2000
+@@ -17,6 +17,7 @@
+ #define _HtWordList_h_
+ 
+ #include <fcntl.h>
++#include <stdlib.h>
+ 
+ #include"HtConfiguration.h"
+ #include "WordList.h"
+--- htdig-3.2.0b2/htnet/Connection.cc.glibc22	Tue Oct  3 14:08:36 2000
++++ htdig-3.2.0b2/htnet/Connection.cc	Tue Oct  3 14:16:19 2000
+@@ -46,9 +46,10 @@
+ 
+ #include "htconfig.h"
+ 
+-extern "C" {
+-    int rresvport(int *);
+-}
++#undef GETPEERNAME_LENGTH_T
++#define GETPEERNAME_LENGTH_T socklen_t
++#undef FD_SET_T
++#define FD_SET_T __fd_set
+ 
+ #undef MIN
+ #define	MIN(a,b)		((a)<(b)?(a):(b))
