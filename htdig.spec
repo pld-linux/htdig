@@ -55,7 +55,7 @@ export CFLAGS LDFLAGS
 	--with-cgi-bin-dir=/home/httpd/cgi-bin \
 	--with-search-dir=/home/httpd/html
 
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
