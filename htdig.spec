@@ -40,9 +40,14 @@ znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
 %patch1 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr \
-	--bindir=/usr/sbin --libexec=/usr/lib --libdir=/usr/lib \
-	--mandir=/usr/man --sysconfdir=/etc/htdig \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
+	--prefix=/usr \
+	--bindir=/usr/sbin \
+	--libexec=/usr/lib \
+	--libdir=/usr/lib \
+	--mandir=/usr/man \
+	--sysconfdir=/etc/htdig \
 	--localstatedir=/var/lib/htdig \
 	--with-image-dir=/home/httpd/html/htdig \
 	--with-cgi-bin-dir=/home/httpd/cgi-bin \
@@ -50,7 +55,6 @@ CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr \
 make
 
 %install
-
 rm -rf $RPM_BUILD_ROOT
 
 make INSTALL_ROOT=$RPM_BUILD_ROOT install-strip
@@ -77,21 +81,21 @@ fi
 
 %files
 %defattr(644,root,root,755)
+%doc CONFIG README htdoc/*
 %attr (640,root,root) %config /etc/htdig/htdig.conf
-%attr (751,root,root) %config /usr/sbin/rundig
-%config(missingok) %verify(not size mtime md5) /home/httpd/html/search.html
+%attr (755,root,root) %config /usr/sbin/*
+%config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
-%attr(755,root,root) /usr/sbin/htdig
-%attr(755,root,root) /usr/sbin/htfuzzy
-%attr(755,root,root) /usr/sbin/htmerge
-%attr(755,root,root) /usr/sbin/htnotify
 /var/lib/htdig
 %attr(755,root,root) /home/httpd/cgi-bin/htsearch
 /home/httpd/html/htdig
 
-%doc CONFIG README htdoc/*
 
 %changelog
+* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [3.1.1-2]
+- added noreplace to %config for /home/httpd/html/search.html.
+
 * Thu Mar 11 1999 Konrad Stêpieñ <konrad@interdata.com.pl>
 - added pl translation
 - added full %attr macros
