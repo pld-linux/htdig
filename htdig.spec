@@ -9,21 +9,6 @@ Version:	3.2.0b3
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Group(cs):	Sí»ové/Utility
-Group(da):	Netværks/Værktøj
-Group(de):	Netzwerkwesen/Dienstprogramme
-Group(es):	Red/Utilitarios
-Group(fr):	Réseau/Utilitaires
-Group(is):	Net/Tól
-Group(it):	Rete/Utility
-Group(no):	Nettverks/Verktøy
-Group(pl):	Sieciowe/Narzêdzia
-Group(pt_BR):	Rede/Utilitários
-Group(pt):	Rede/Utilidades
-Group(ru):	óÅÔØ/õÔÉÌÉÔÙ
-Group(sl):	Omre¾ni/Pripomoèki
-Group(sv):	Nätverk/Verktyg
-Group(uk):	íÅÒÅÖÁ/õÔÉÌ¦ÔÉ
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
 URL:		http://www.htdig.org/
@@ -110,22 +95,6 @@ entendam o protocolo HTTP 1.0.
 Summary:	Include files and libraries for htdig
 Summary(pl):	Pliki nag³ówkowe dla htdig
 Group:		Development/Libraries
-Group(cs):	Vıvojové prostøedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	Şróunartól/Ağgerğasöfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(sl):	Razvoj/Knji¾nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
@@ -138,22 +107,6 @@ Ten pakiet zawiera pliki nag³ówkowe htdig.
 Summary:	htdig static libraries
 Summary(pl):	Biblioteki statyczne htdig
 Group:		Development/Libraries
-Group(cs):	Vıvojové prostøedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	Şróunartól/Ağgerğasöfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	³«È¯/¥é¥¤¥Ö¥é¥ê
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(sl):	Razvoj/Knji¾nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
