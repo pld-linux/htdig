@@ -1,0 +1,40 @@
+diff -urN htdig-3.2.0b3.org/configure.in htdig-3.2.0b3/configure.in
+--- htdig-3.2.0b3.org/configure.in	Sat Apr  5 17:22:29 2003
++++ htdig-3.2.0b3/configure.in	Sat Apr  5 17:35:37 2003
+@@ -106,7 +106,7 @@
+ AM_PROG_TIME
+ 
+ AM_PROG_LEX
+-AM_PROG_YACC
++AC_PROG_YACC
+ 
+ dnl Checks for libraries.
+ AC_CHECK_LIB(socket, socket)
+@@ -153,14 +153,11 @@
+ 		   return regcomp(&re, "ht.*Dig", REG_ICASE);
+ 		}
+ 		],
+-  [AC_MSG_RESULT(yes);LIBOBJS="$LIBOBJS regex.${ac_objext}"],
++  [AC_MSG_RESULT(yes);AC_LIBOBJ(regex.${ac_objext})],
+   [AC_MSG_RESULT(no);AC_DEFINE(HAVE_BROKEN_REGEX)],
+   [AC_MSG_RESULT(unknown);AC_DEFINE(HAVE_BROKEN_REGEX)]
+ )
+ 
+-LTLIBOBJS=`echo "$LIBOBJS" | sed 's/\.o/.lo/g'`
+-AC_SUBST(LTLIBOBJS)
+-
+ AC_MSG_CHECKING(if --enable-bigfile option specified)
+ AC_ARG_ENABLE(bigfile,
+ 	[  --enable-bigfile       Enable Linux, AIX, HP/UX, Solaris big files.],
+diff -urN htdig-3.2.0b3.org/htfuzzy/Makefile.am htdig-3.2.0b3/htfuzzy/Makefile.am
+--- htdig-3.2.0b3.org/htfuzzy/Makefile.am	Sat Apr  5 17:22:30 2003
++++ htdig-3.2.0b3/htfuzzy/Makefile.am	Sat Apr  5 17:31:25 2003
+@@ -28,7 +28,7 @@
+ 
+ bin_PROGRAMS = htfuzzy
+ 
+-htfuzzy_SOURCES = htfuzzy.cc
++htfuzzy_SOURCES = htfuzzy.lo
+ htfuzzy_DEPENDENCIES = libfuzzy.la $(HTLIBS)
+ htfuzzy_LDFLAGS = $(PROFILING)
+ htfuzzy_LDADD = libfuzzy.la $(HTLIBS)
