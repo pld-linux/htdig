@@ -43,8 +43,8 @@ particular sub section of a web site.
 As opposed to some WAIS-based or web-server based search engines,
 ht://Dig can span several web servers at a site. The type of these
 different web servers doesn't matter as long as they understand the
-HTTP 1.0 protocol. 
-This version of ht://Dig has been patched for handling pl chars encoded 
+HTTP 1.0 protocol.
+This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
 
 %description -l es
@@ -71,7 +71,7 @@ W odró¿nieniu do innych bazuj±cych na WAIS-sie lub serwerch www
 systemach, ht://Dig mo¿e ³±czyæ kilka serwerów www w jednym miejscu.
 Typ serwera nie ma znaczenia, dopóki pracuje on zgodnie z protoko³em
 HTTP 1.0
-Ta wersja ht://Dig zosta³a za³atana aby obs³ugiwaæ polskie znaki 
+Ta wersja ht://Dig zosta³a za³atana aby obs³ugiwaæ polskie znaki
 zakodowane zgodnie z ISO-8859-2.
 
 %description -l pt_BR
