@@ -15,12 +15,12 @@ Source0:	http://www.htdig.org/files/snapshots/%{name}-%{version}-%{snap}.tar.gz
 # Source0-md5:	e69d64eaaf4c10742ba198daf641a27c
 Patch0:		%{name}-pl-dont-mix-up.patch
 URL:		http://www.htdig.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:1.5-5
 BuildRequires:	zlib-devel
-BuildRequires:	automake
-BuildRequires:	autoconf
-BuildRequires:	libtool >= 1.5-5
 Requires(post):	awk
 Requires(post):	fileutils
 Requires(post):	grep
