@@ -6,16 +6,19 @@ Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
 Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
 Name:		htdig
 Version:	3.2.0b3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc22.patch
 URL:		http://www.htdig.org/
+BuildRequires:	flex
 BuildRequires:	zlib-devel
 BuildRequires:	libstdc++-devel
 PreReq:		webserver
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_sysconfdir	/etc/htdig
 
 %description
 The ht://Dig system is a complete world wide web indexing and
@@ -122,11 +125,11 @@ Statyczne biblioteki htdig.
 %build
 %configure2_13 \
 	--libexec=%{_libdir} \
-	--sysconfdir=%{_sysconfdir}/%{name} \
+	--sysconfdir=%{_sysconfdir} \
 	--with-image-dir=/home/httpd/html/%{name} \
 	--with-cgi-bin-dir=/home/httpd/cgi-bin \
 	--with-search-dir=/home/httpd/html \
-	--with-config-dir=%{_sysconfdir}/%{name} \
+	--with-config-dir=%{_sysconfdir} \
 	--localstatedir=%{_var}/lib
 
 %{__make}
@@ -157,11 +160,11 @@ if [ "$1" = 1 ]; then
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="`hostname -f`"
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
 	SERVERNAME=`grep '^ServerName' /etc/httpd/httpd.conf | uniq -d | awk '{print $2}'`
-	grep -v -e local_urls -e local_user_urls -e start_url /etc/htdig/htdig.conf > /tmp/htdig.tmp
-	mv -f /tmp/htdig.tmp /etc/htdig/htdig.conf
+	grep -v -e local_urls -e local_user_urls -e start_url %{_sysconfdir}/htdig.conf > /tmp/htdig.tmp
+	mv -f /tmp/htdig.tmp %{_sysconfdir}/htdig.conf
 	echo "start_url:$SERVERNAMES
 local_urls:		$SERVERNAMES
-local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> /etc/htdig/htdig.conf
+local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> %{_sysconfdir}/htdig.conf
 
 fi
 
@@ -177,9 +180,10 @@ fi
 %attr (755,root,root) %{_libdir}/*/*.la
 /home/httpd/html/%{name}/*
 %{_datadir}/%{name}/*
-%config(noreplace) %{_sysconfdir}/htdig/*
+%attr(750,root,http) %dir %{_sysconfdir}
+%config(noreplace) %{_sysconfdir}/*
 %config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
-%config(missingok) %{_sysconfdir}/cron.daily/htdig-dbgen
+%config(missingok) /etc/cron.daily/htdig-dbgen
 
 %files devel
 %defattr(644,root,root,755)
