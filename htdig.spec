@@ -8,7 +8,6 @@ Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
 Source:		http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		htdig-conf.patch
-Patch1:		htdig-parser.patch
 URL:		http://www.htdig.org/
 Prereq:		webserver
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -38,7 +37,6 @@ znaczenia, dopóki pracuje on zgodnie z protoko³em HTTP 1.0
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
