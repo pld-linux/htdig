@@ -216,7 +216,7 @@ fi
 %{_libdir}/*/*.la
 %dir %{htdigdir}
 %{htdigdir}/*
-%{_datadir}/%{name}/*
+%{_datadir}/%{name}
 %attr(750,root,http) %dir %{_sysconfdir}
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
 %config(missingok,noreplace) %verify(not size mtime md5) %{htmldir}/search.html
