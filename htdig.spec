@@ -42,7 +42,7 @@ znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr \
 	--bindir=/usr/sbin \
 	--libexec=/usr/lib \
