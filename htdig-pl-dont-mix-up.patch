@@ -1,0 +1,10 @@
+--- /home/users/hunter/backup/HtSGMLCodec.cc~   Sun Dec 22 15:22:13 2002
++++ htcommon/HtSGMLCodec.cc     Sun Dec 22 15:22:13 2002
+@@ -47,6 +47,7 @@
+ 
+   for (int i = 160; i <= 255; i++)
+     {
++      if ((i==230) || (i==234) || (i==243) || (i==177) || (i==182) || (i==179) || (i==191) || (i==188) || (i==241) || (i==202) || (i==211) || (i==161) || (i==166) || (i==163) || (i==175) || (i==172)) continue;
+       String temp = 0;
+       temp << (char) i;
+       myToList->Add(temp);
