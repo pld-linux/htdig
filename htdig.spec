@@ -10,7 +10,7 @@ Source:		http://www.htdig.org/files/%{name}-%{version}.tar.gz
 Patch0:		htdig-conf.patch
 Patch1:		htdig-parser.patch
 URL:		http://www.htdig.org/
-Prereq:		webserwer
+Prereq:		webserver
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -32,8 +32,8 @@ nadeje siê do zastosowania w pojedyñczej firmie, kampusie lub jakiejkolwiek
 stronie www.
 
 W odró¿nieniu do innych bazuj±cych na WAIS-sie lub serwerch www systemach,
-ht://Dig mo¿e ³±czyæ kilka serwerów www w jednum miejscu. Typ serwera nie ma
-znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
+ht://Dig mo¿e ³±czyæ kilka serwerów www w jednym miejscu. Typ serwera nie ma
+znaczenia, dopóki pracuje on zgodnie z protoko³em HTTP 1.0
 
 %prep
 %setup -q
@@ -43,13 +43,13 @@ znaczenie, dopuki pracuje on zgodnie z protoko³em HTTP 1.0
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target_platform} \
-	--prefix=/usr \
+	--prefix=%{_prefix} \
 	--bindir=%{_sbindir} \
-	--libexec=/usr/lib \
+	--libexec=%{_libdir} \
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir} \
 	--sysconfdir=/etc/htdig \
-	--localstatedir=/var/lib/htdig \
+	--localstatedir=/var/state/htdig \
 	--with-image-dir=/home/httpd/html/htdig \
 	--with-cgi-bin-dir=/home/httpd/cgi-bin \
 	--with-search-dir=/home/httpd/html
@@ -87,6 +87,6 @@ fi
 %attr (755,root,root) %config %{_sbindir}/*
 %config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
-/var/lib/htdig
+/var/state/htdig
 %attr(755,root,root) /home/httpd/cgi-bin/htsearch
 /home/httpd/html/htdig
