@@ -14,12 +14,19 @@ Patch0:		%{name}-glibc22.patch
 Patch1:		%{name}-pl-dont-mix-up.patch
 URL:		http://www.htdig.org/
 BuildRequires:	flex
-BuildRequires:	zlib-devel
 BuildRequires:	libstdc++-devel
-PreReq:		webserver
+BuildRequires:	zlib-devel
+PreReq:		apache
+Requires(post):	awk
+Requires(post):	fileutils
+Requires(post):	grep
+Requires(post):	textutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/htdig
+%define		cgidir		/home/services/httpd/cgi-bin
+%define		htmldir		/home/services/httpd/html
+%define		htdigdir	%{htmldir}/%{name}
 
 %description
 The ht://Dig system is a complete world wide web indexing and
@@ -49,7 +56,6 @@ desde que entiendan el protocolo HTTP 1.0.
 This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
 
-
 %description -l pl
 ht://Dig jest kompletnym systemem indeksuj╠cym i przeszukuj╠cym www
 dla maЁych domen oraz intranetu. System nie zostaЁ opracowany jako
@@ -78,7 +84,6 @@ entendam o protocolo HTTP 1.0.
 This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
 
-
 %description -l ru
 Система ht://Dig является законченной системой индексирования и поиска
 в веб-страницах для небольших доменов или intranet. Эта система не
@@ -93,7 +98,6 @@ in iso-8859-2.
 значения не имеют, необходима всего лишь поддержка протокола HTTP 1.0.
 This version of ht://Dig has been patched for handling pl chars encoded
 in iso-8859-2.
-
 
 %description -l uk
 Система ht://Dig ╓ завершеною системою ╕ндексування та пошуку у
@@ -143,9 +147,9 @@ Statyczne biblioteki htdig.
 %configure2_13 \
 	--libexec=%{_libdir} \
 	--sysconfdir=%{_sysconfdir} \
-	--with-image-dir=/home/httpd/html/%{name} \
-	--with-cgi-bin-dir=/home/httpd/cgi-bin \
-	--with-search-dir=/home/httpd/html \
+	--with-image-dir=%{htdigdir} \
+	--with-cgi-bin-dir=%{cgidir} \
+	--with-search-dir=%{htmldir} \
 	--with-config-dir=%{_sysconfdir} \
 	--localstatedir=%{_var}/lib
 
@@ -157,12 +161,12 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/cron.daily
-ln -sf ../..%{_bindir}/rundig \
+ln -sf %{_bindir}/rundig \
 	$RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 
-install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
-ln -sf ../../../..%{_defaultdocdir}/%{name}-%{version} \
-	$RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
+install -d $RPM_BUILD_ROOT%{htdigdir}
+ln -sf %{_defaultdocdir}/%{name}-%{version} \
+	$RPM_BUILD_ROOT%{htdigdir}/htdoc
 
 install -d $RPM_BUILD_ROOT/var/lib/%{name}
 
@@ -172,35 +176,38 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # Only run this if installing for the first time
 if [ "$1" = 1 ]; then
-	for i in `grep '^ServerName' /etc/httpd/httpd.conf | sort -u | awk '{print $2}'`; do echo -n http://$i/; echo -n " "; done > /tmp/htdig.tmp
-	SERVERNAMES="`cat /tmp/htdig.tmp`"
+	umask 027
+	for i in `grep '^ServerName' /etc/httpd/httpd.conf | sort -u | awk '{print $2}'`; do
+		echo -n "http://$i/ "
+	done > /etc/httpd/httpd.conf.htdig.tmp
+	SERVERNAMES="`cat /etc/httpd/httpd.conf.htdig.tmp`"
+	rm -f /etc/httpd/httpd.conf.htdig.tmp
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="`hostname -f`"
 	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
 	SERVERNAME=`grep '^ServerName' /etc/httpd/httpd.conf | uniq -d | awk '{print $2}'`
-	grep -v -e local_urls -e local_user_urls -e start_url %{_sysconfdir}/htdig.conf > /tmp/htdig.tmp
-	mv -f /tmp/htdig.tmp %{_sysconfdir}/htdig.conf
+	grep -v -e local_urls -e local_user_urls -e start_url %{_sysconfdir}/htdig.conf > %{_syscofndir}/htdig.conf.tmp
+	mv -f %{_sysconfdir}/htdig.conf.tmp %{_sysconfdir}/htdig.conf
 	echo "start_url:$SERVERNAMES
 local_urls:		$SERVERNAMES
 local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> %{_sysconfdir}/htdig.conf
-
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc COPYING README htdoc
 %dir /var/lib/%{name}
-%attr(755,nobody,nobody) /home/httpd/cgi-bin/*
+%attr(755,root,root) %{cgidir}/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/mifluz
 %attr(755,root,root) %{_libdir}/*/*.so
 %{_libdir}/*/*.la
-%dir /home/httpd/html/%{name}
-/home/httpd/html/%{name}/*
+%dir %{htdigdir}
+%{htdigdir}/%{name}/*
 %{_datadir}/%{name}/*
 %attr(750,root,http) %dir %{_sysconfdir}
-%config(noreplace) %{_sysconfdir}/*
-%config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
+%config(missingok,noreplace) %verify(not size mtime md5) %{htmldir}/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
 
 %files devel
