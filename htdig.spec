@@ -1,13 +1,12 @@
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(pl):	System indeksowania i przeszukiwania www dla ma³ych domen i intranetu
 Name:		htdig
-Version:	3.1.2
+Version:	3.1.5
 Release:	1
 Copyright:	GPL
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
 Source:		http://www.htdig.org/files/%{name}-%{version}.tar.gz
-Patch0:		htdig-conf.patch
 URL:		http://www.htdig.org/
 Prereq:		webserver
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -36,21 +35,23 @@ znaczenia, dopóki pracuje on zgodnie z protoko³em HTTP 1.0
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+CFLAGS="$RPM_OPT_FLAGS"
+LDFLAGS="-s"
+export CFLAGS LDFLAGS
+
 ./configure %{_target_platform} \
-	--prefix=%{_prefix} \
-	--bindir=%{_sbindir} \
+	--prefix=%{_prefix}/local/htdig \
+	--exec_prefix=%{_prefix}/local/htdig \
 	--libexec=%{_libdir} \
 	--libdir=%{_libdir} \
 	--mandir=%{_mandir} \
 	--sysconfdir=/etc/htdig \
-	--localstatedir=/var/state/htdig \
 	--with-image-dir=/home/httpd/html/htdig \
 	--with-cgi-bin-dir=/home/httpd/cgi-bin \
 	--with-search-dir=/home/httpd/html
+
 make
 
 %install
@@ -58,9 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 
 make INSTALL_ROOT=$RPM_BUILD_ROOT install-strip
 install -d $RPM_BUILD_ROOT/etc/cron.daily
-ln -s ../..%{_sbindir}/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
+ln -s ../..%{_prefix}/local/%{name}/bin/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
 install -d $RPM_BUILD_ROOT/home/httpd/html/htdig/
-ln -s ../../../../usr/doc/htdig-%{name}-%{version} \
+ln -s ../../../..%{_defaultdocdir}/%{name}-%{version} \
         $RPM_BUILD_ROOT/home/httpd/html/htdig/htdoc
 
 %clean
@@ -69,22 +70,27 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # Only run this if installing for the first time
 if [ "$1" = 1 ]; then
-	SERVERNAME="`grep '^ServerName' /etc/httpd/conf/httpd.conf | awk '{print $2}'`"
-	[ -z "$SERVERNAME" ] && SERVERNAME="`hostname -f`"
-	[ -z "$SERVERNAME" ] && SERVERNAME="localhost"
-	echo "start_url:	http://$SERVERNAME/
-local_urls:	http://$SERVERNAME/=/home/httpd/html/
-local_user_urls:	http://$SERVERNAME/=/home/,/public_html/" >> /etc/htdig/htdig.conf
+	for i in `grep '^ServerName' /etc/httpd/conf/httpd.conf | awk '{print $2}'`; do echo -n http://$i/; echo -n " "; done > /tmp/htdig.tmp
+	SERVERNAMES="`cat /tmp/htdig.tmp`"
+	[ -z "$SERVERNAMES" ] && SERVERNAMES="`hostname -f`"
+	[ -z "$SERVERNAMES" ] && SERVERNAMES="localhost"
+	SERVERNAME=`grep '^ServerName' /etc/httpd/conf/httpd.conf | awk '{print $2}'| uniq -d`
+	grep -v -e local_urls -e local_user_urls -e start_url /etc/htdig/htdig.conf > /tmp/htdig.tmp
+	mv /tmp/htdig.tmp /etc/htdig/htdig.conf
+	echo "start_url:	$SERVERNAMES
+local_urls:	$SERVERNAMES
+local_user_urls:	$SERVERNAME/home/,/public_html/" >> /etc/htdig/htdig.conf
 
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc CONFIG README htdoc/*
-%attr (640,root,root) %config /etc/htdig/htdig.conf
-%attr (755,root,root) %config %{_sbindir}/*
+%attr (755,root,root) %{_prefix}/local/%{name}/bin/*
+%attr (755,root,root) %{_prefix}/local/%{name}/common/*
+%dir %{_prefix}/local/%{name}/db
+%attr (755,nobody,nobody) /home/httpd/cgi-bin
+%config(noreplace) /etc/htdig/htdig.conf
 %config(missingok noreplace) %verify(not size mtime md5) /home/httpd/html/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
-/var/state/htdig
-%attr(755,root,root) /home/httpd/cgi-bin/htsearch
 /home/httpd/html/htdig
