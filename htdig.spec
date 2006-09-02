@@ -173,7 +173,7 @@ install -d $RPM_BUILD_ROOT{/etc/cron.daily,%{_localstatedir}/%{name},%{htdigdir}
 	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf %{_bindir}/rundig $RPM_BUILD_ROOT/etc/cron.daily/htdig-dbgen
-ln -sf %{_defaultdocdir}/%{name}-%{version} $RPM_BUILD_ROOT%{htdigdir}/htdoc
+ln -sf %{_docdir}/%{name}-%{version} $RPM_BUILD_ROOT%{htdigdir}/htdoc
 
 for file in $RPM_BUILD_ROOT%{cgidir}/*; do
 	file=$(basename "$file")
