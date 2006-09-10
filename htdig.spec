@@ -6,15 +6,14 @@ Summary(pt_BR):	Indexador e mАquina de procura para web
 Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
 Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
 Name:		htdig
-Version:	3.2.0b4
-Release:	0.%{snap}.1
+Version:	3.2.0b6
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
-# 3.2.0b3 has security bugs, so for now we are using snapshot
-Source0:	http://www.htdig.org/files/snapshots/%{name}-%{version}-%{snap}.tar.gz
-# Source0-md5:	e69d64eaaf4c10742ba198daf641a27c
+Source0:	http://dl.sourceforge.net/htdig/%{name}-%{version}.tar.bz2
+# Source0-md5:	8b9b9587a411ac7dd278fa5413428960
 Patch0:		%{name}-pl-dont-mix-up.patch
-Patch1:		%{name}-ac.patch
+Patch1:		%{name}-gcc4.patch
 URL:		http://www.htdig.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -141,7 +140,7 @@ This package contains static libraries of htdig.
 Statyczne biblioteki htdig.
 
 %prep
-%setup -q -n %{name}-%{version}-%{snap}
+%setup -q
 %patch0 -p0
 %patch1 -p1
 
@@ -156,7 +155,7 @@ cd db
 %{__autoconf}
 %{__automake}
 cd ..
-%configure \
+%configure LDFLAGS="$LDFLAGS -Wl,--no-as-needed" \
 	--libexec=%{_libdir} \
 	--with-image-dir=%{htdigdir} \
 	--with-cgi-bin-dir=%{cgidir} \
@@ -211,7 +210,7 @@ fi
 %dir %{_localstatedir}/%{name}
 %attr(755,root,root) %{cgidir}/ht*
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/mifluz
+%dir %{_libdir}/htdig_db
 %attr(755,root,root) %{_libdir}/*/*-3.2.0.so
 %{htdigdir}
 %{_datadir}/%{name}
@@ -219,6 +218,7 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 %config(missingok,noreplace) %verify(not md5 mtime size) %{htmldir}/search.html
 %config(missingok) /etc/cron.daily/htdig-dbgen
+%{_mandir}/man?/*
 
 %files devel
 %defattr(644,root,root,755)
