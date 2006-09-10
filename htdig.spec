@@ -1,4 +1,4 @@
-%define	snap	20030413
+# TODO: fix --as-needed, remove LDFLAGS hack
 Summary:	A web indexing and searching system for a small domain or intranet
 Summary(es):	Indexador y máquina de búsqueda para web
 Summary(pl):	System indeksowania i przeszukiwania WWW dla ma³ych domen i intranetu
@@ -155,7 +155,8 @@ cd db
 %{__autoconf}
 %{__automake}
 cd ..
-%configure LDFLAGS="$LDFLAGS -Wl,--no-as-needed" \
+%configure \
+	LDFLAGS="$LDFLAGS -Wl,--no-as-needed" \
 	--libexec=%{_libdir} \
 	--with-image-dir=%{htdigdir} \
 	--with-cgi-bin-dir=%{cgidir} \
