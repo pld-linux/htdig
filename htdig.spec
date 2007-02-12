@@ -1,10 +1,10 @@
 # TODO: fix --as-needed, remove LDFLAGS hack
 Summary:	A web indexing and searching system for a small domain or intranet
-Summary(es):	Indexador y mАquina de bЗsqueda para web
-Summary(pl):	System indeksowania i przeszukiwania WWW dla maЁych domen i intranetu
-Summary(pt_BR):	Indexador e mАquina de procura para web
-Summary(ru):	Индексирующая система web-поиска для небольших доменов или intranet
-Summary(uk):	╤ндексуюча система web-пошуку для невеликих домен╕в чи intranet
+Summary(es.UTF-8):   Indexador y mц║quina de bц╨squeda para web
+Summary(pl.UTF-8):   System indeksowania i przeszukiwania WWW dla maе┌ych domen i intranetu
+Summary(pt_BR.UTF-8):   Indexador e mц║quina de procura para web
+Summary(ru.UTF-8):   п≤п╫п╢п╣п╨я│п╦я─я┐я▌я┴п╟я▐ я│п╦я│я┌п╣п╪п╟ web-п©п╬п╦я│п╨п╟ п╢п╩я▐ п╫п╣п╠п╬п╩я▄я┬п╦я┘ п╢п╬п╪п╣п╫п╬п╡ п╦п╩п╦ intranet
+Summary(uk.UTF-8):   п├п╫п╢п╣п╨я│я┐я▌я┤п╟ я│п╦я│я┌п╣п╪п╟ web-п©п╬я┬я┐п╨я┐ п╢п╩я▐ п╫п╣п╡п╣п╩п╦п╨п╦я┘ п╢п╬п╪п╣п╫я√п╡ я┤п╦ intranet
 Name:		htdig
 Version:	3.2.0b6
 Release:	1
@@ -47,96 +47,96 @@ different web servers doesn't matter as long as they understand the
 HTTP 1.0 protocol. This version of ht://Dig has been patched for
 handling pl chars encoded in iso-8859-2.
 
-%description -l es
-El ht://Dig es un sistema completo para indexaciСn y bЗsqueda en un
-dominio pequeЯo o intranet. El sistema no fue proyectado para
-substituir sistemas mАs potentes en Internet como el Lycos, Infoseek,
-Webcrawler o Altavista. Su propСsito es cubrir las necesidades de una
-compaЯМa, campus o mismo una secciСn particular de un sitio Web.
-Diferentemente de sistemas de bЗsqueda basados en WAIS o servidores
+%description -l es.UTF-8
+El ht://Dig es un sistema completo para indexaciцЁn y bц╨squeda en un
+dominio pequeц╠o o intranet. El sistema no fue proyectado para
+substituir sistemas mц║s potentes en Internet como el Lycos, Infoseek,
+Webcrawler o Altavista. Su propцЁsito es cubrir las necesidades de una
+compaц╠ц╜a, campus o mismo una secciцЁn particular de un sitio Web.
+Diferentemente de sistemas de bц╨squeda basados en WAIS o servidores
 web el ht://Dig puede cubrir varios servidores web en una
-localizaciСn. El tipo de estos diferentes servidores web no interesa
+localizaciцЁn. El tipo de estos diferentes servidores web no interesa
 desde que entiendan el protocolo HTTP 1.0. This version of ht://Dig
 has been patched for handling pl chars encoded in iso-8859-2.
 
-%description -l pl
-ht://Dig jest kompletnym systemem indeksuj╠cym i przeszukuj╠cym WWW
-dla maЁych domen oraz intranetu. System nie zostaЁ opracowany jako
+%description -l pl.UTF-8
+ht://Dig jest kompletnym systemem indeksujд┘cym i przeszukujд┘cym WWW
+dla maе┌ych domen oraz intranetu. System nie zostaе┌ opracowany jako
 wielki system typu Lycos, Infoseek WebCrawler i AltaVista. Natomiast
-nadaje siЙ do zastosowania w pojedynczej firmie, kampusie lub
+nadaje siд≥ do zastosowania w pojedynczej firmie, kampusie lub
 jakiejkolwiek stronie WWW.
 
-W odrС©nieniu do innych bazuj╠cych na WAIS-sie lub serwerch WWW
-systemach, ht://Dig mo©e Ё╠czyФ kilka serwerСw WWW w jednym miejscu.
-Typ serwera nie ma znaczenia, dopСki pracuje on zgodnie z protokoЁem
-HTTP 1.0 Ta wersja ht://Dig zostaЁa zaЁatana aby obsЁugiwaФ polskie
+W odrцЁе╪nieniu do innych bazujд┘cych na WAIS-sie lub serwerch WWW
+systemach, ht://Dig moе╪e е┌д┘czyд┤ kilka serwerцЁw WWW w jednym miejscu.
+Typ serwera nie ma znaczenia, dopцЁki pracuje on zgodnie z protokoе┌em
+HTTP 1.0 Ta wersja ht://Dig zostaе┌a zaе┌atana aby obsе┌ugiwaд┤ polskie
 znaki zakodowane zgodnie z ISO-8859-2.
 
-%description -l pt_BR
-O ht://Dig И um sistema completo para indexaГЦo e busca em um domМnio
-pequeno ou intranet. O sistema nЦo foi projetado para substituir
+%description -l pt_BR.UTF-8
+O ht://Dig ц╘ um sistema completo para indexaц╖цёo e busca em um domц╜nio
+pequeno ou intranet. O sistema nцёo foi projetado para substituir
 sistemas mais poderosos para a Internet como o Lycos, Infoseek,
-Webcrawler ou Altavista. Seu propСsito И cobrir as necessidades para
-uma companhia, campus ou mesmo uma seГЦo particular de um site Web.
+Webcrawler ou Altavista. Seu propцЁsito ц╘ cobrir as necessidades para
+uma companhia, campus ou mesmo uma seц╖цёo particular de um site Web.
 
 Diferentemente de sistemas de busca baseados em WAIS ou servidores web
-o ht://Dig pode cobrir vАrios servidores web em uma localizaГЦo. O
-tipo destes diferentes servidores web nЦo interessa desde que eles
+o ht://Dig pode cobrir vц║rios servidores web em uma localizaц╖цёo. O
+tipo destes diferentes servidores web nцёo interessa desde que eles
 entendam o protocolo HTTP 1.0. This version of ht://Dig has been
 patched for handling pl chars encoded in iso-8859-2.
 
-%description -l ru
-Система ht://Dig является законченной системой индексирования и поиска
-в веб-страницах для небольших доменов или intranet. Эта система не
-предназначена для замены мощных общеинтернетовских поисковых систем
-типа Lycos, Infoseek, Webcrawler или AltaVista. Ее назначение -
-обеспечить потребности в средствах поиска для компании, кампуса или
-даже подраздела одного веб-сайта.
+%description -l ru.UTF-8
+п║п╦я│я┌п╣п╪п╟ ht://Dig я▐п╡п╩я▐п╣я┌я│я▐ п╥п╟п╨п╬п╫я┤п╣п╫п╫п╬п╧ я│п╦я│я┌п╣п╪п╬п╧ п╦п╫п╢п╣п╨я│п╦я─п╬п╡п╟п╫п╦я▐ п╦ п©п╬п╦я│п╨п╟
+п╡ п╡п╣п╠-я│я┌я─п╟п╫п╦я├п╟я┘ п╢п╩я▐ п╫п╣п╠п╬п╩я▄я┬п╦я┘ п╢п╬п╪п╣п╫п╬п╡ п╦п╩п╦ intranet. п╜я┌п╟ я│п╦я│я┌п╣п╪п╟ п╫п╣
+п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫п╟ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ п╪п╬я┴п╫я▀я┘ п╬п╠я┴п╣п╦п╫я┌п╣я─п╫п╣я┌п╬п╡я│п╨п╦я┘ п©п╬п╦я│п╨п╬п╡я▀я┘ я│п╦я│я┌п╣п╪
+я┌п╦п©п╟ Lycos, Infoseek, Webcrawler п╦п╩п╦ AltaVista. п∙п╣ п╫п╟п╥п╫п╟я┤п╣п╫п╦п╣ -
+п╬п╠п╣я│п©п╣я┤п╦я┌я▄ п©п╬я┌я─п╣п╠п╫п╬я│я┌п╦ п╡ я│я─п╣п╢я│я┌п╡п╟я┘ п©п╬п╦я│п╨п╟ п╢п╩я▐ п╨п╬п╪п©п╟п╫п╦п╦, п╨п╟п╪п©я┐я│п╟ п╦п╩п╦
+п╢п╟п╤п╣ п©п╬п╢я─п╟п╥п╢п╣п╩п╟ п╬п╢п╫п╬пЁп╬ п╡п╣п╠-я│п╟п╧я┌п╟.
 
-В противоположность некоторым поисковым машинам, основанным на WAIS
-или средствах веб-сервера, ht://Dig может обслуживать несколько
-веб-серверов в одном поисковом сайте. Типы этих различных веб-серверов
-значения не имеют, необходима всего лишь поддержка протокола HTTP 1.0.
+п▓ п©я─п╬я┌п╦п╡п╬п©п╬п╩п╬п╤п╫п╬я│я┌я▄ п╫п╣п╨п╬я┌п╬я─я▀п╪ п©п╬п╦я│п╨п╬п╡я▀п╪ п╪п╟я┬п╦п╫п╟п╪, п╬я│п╫п╬п╡п╟п╫п╫я▀п╪ п╫п╟ WAIS
+п╦п╩п╦ я│я─п╣п╢я│я┌п╡п╟я┘ п╡п╣п╠-я│п╣я─п╡п╣я─п╟, ht://Dig п╪п╬п╤п╣я┌ п╬п╠я│п╩я┐п╤п╦п╡п╟я┌я▄ п╫п╣я│п╨п╬п╩я▄п╨п╬
+п╡п╣п╠-я│п╣я─п╡п╣я─п╬п╡ п╡ п╬п╢п╫п╬п╪ п©п╬п╦я│п╨п╬п╡п╬п╪ я│п╟п╧я┌п╣. п╒п╦п©я▀ я█я┌п╦я┘ я─п╟п╥п╩п╦я┤п╫я▀я┘ п╡п╣п╠-я│п╣я─п╡п╣я─п╬п╡
+п╥п╫п╟я┤п╣п╫п╦я▐ п╫п╣ п╦п╪п╣я▌я┌, п╫п╣п╬п╠я┘п╬п╢п╦п╪п╟ п╡я│п╣пЁп╬ п╩п╦я┬я▄ п©п╬п╢п╢п╣я─п╤п╨п╟ п©я─п╬я┌п╬п╨п╬п╩п╟ HTTP 1.0.
 This version of ht://Dig has been patched for handling pl chars
 encoded in iso-8859-2.
 
-%description -l uk
-Система ht://Dig ╓ завершеною системою ╕ндексування та пошуку у
-веб-стор╕нках для невеликих домен╕в та intranet. Ця система не
-призначена для зам╕ни потужних загально╕нтернет╕вських пошукових
-систем типу Lycos, Infoseek, Webcrawler чи AltaVista. ╥╖ призначення -
-забезпечити потреби в засобах пошуку для компан╕╖, кампусу чи нав╕ть
-п╕дрозд╕лу одного веб-сайту.
+%description -l uk.UTF-8
+п║п╦я│я┌п╣п╪п╟ ht://Dig я■ п╥п╟п╡п╣я─я┬п╣п╫п╬я▌ я│п╦я│я┌п╣п╪п╬я▌ я√п╫п╢п╣п╨я│я┐п╡п╟п╫п╫я▐ я┌п╟ п©п╬я┬я┐п╨я┐ я┐
+п╡п╣п╠-я│я┌п╬я─я√п╫п╨п╟я┘ п╢п╩я▐ п╫п╣п╡п╣п╩п╦п╨п╦я┘ п╢п╬п╪п╣п╫я√п╡ я┌п╟ intranet. п╕я▐ я│п╦я│я┌п╣п╪п╟ п╫п╣
+п©я─п╦п╥п╫п╟я┤п╣п╫п╟ п╢п╩я▐ п╥п╟п╪я√п╫п╦ п©п╬я┌я┐п╤п╫п╦я┘ п╥п╟пЁп╟п╩я▄п╫п╬я√п╫я┌п╣я─п╫п╣я┌я√п╡я│я▄п╨п╦я┘ п©п╬я┬я┐п╨п╬п╡п╦я┘
+я│п╦я│я┌п╣п╪ я┌п╦п©я┐ Lycos, Infoseek, Webcrawler я┤п╦ AltaVista. п┤я≈ п©я─п╦п╥п╫п╟я┤п╣п╫п╫я▐ -
+п╥п╟п╠п╣п╥п©п╣я┤п╦я┌п╦ п©п╬я┌я─п╣п╠п╦ п╡ п╥п╟я│п╬п╠п╟я┘ п©п╬я┬я┐п╨я┐ п╢п╩я▐ п╨п╬п╪п©п╟п╫я√я≈, п╨п╟п╪п©я┐я│я┐ я┤п╦ п╫п╟п╡я√я┌я▄
+п©я√п╢я─п╬п╥п╢я√п╩я┐ п╬п╢п╫п╬пЁп╬ п╡п╣п╠-я│п╟п╧я┌я┐.
 
-На противагу деяким пошуковим системам, що базуються на WAIS чи
-засобах веб-серверу, ht://Dig може обслуговувати дек╕лька веб-сервер╕в
-в одному пошуковому сайт╕. Типи цих р╕зних веб-сервер╕в значення не
-мають, необх╕дна всього лише п╕дтримка протоколу HTTP 1.0. This
+п²п╟ п©я─п╬я┌п╦п╡п╟пЁя┐ п╢п╣я▐п╨п╦п╪ п©п╬я┬я┐п╨п╬п╡п╦п╪ я│п╦я│я┌п╣п╪п╟п╪, я┴п╬ п╠п╟п╥я┐я▌я┌я▄я│я▐ п╫п╟ WAIS я┤п╦
+п╥п╟я│п╬п╠п╟я┘ п╡п╣п╠-я│п╣я─п╡п╣я─я┐, ht://Dig п╪п╬п╤п╣ п╬п╠я│п╩я┐пЁп╬п╡я┐п╡п╟я┌п╦ п╢п╣п╨я√п╩я▄п╨п╟ п╡п╣п╠-я│п╣я─п╡п╣я─я√п╡
+п╡ п╬п╢п╫п╬п╪я┐ п©п╬я┬я┐п╨п╬п╡п╬п╪я┐ я│п╟п╧я┌я√. п╒п╦п©п╦ я├п╦я┘ я─я√п╥п╫п╦я┘ п╡п╣п╠-я│п╣я─п╡п╣я─я√п╡ п╥п╫п╟я┤п╣п╫п╫я▐ п╫п╣
+п╪п╟я▌я┌я▄, п╫п╣п╬п╠я┘я√п╢п╫п╟ п╡я│я▄п╬пЁп╬ п╩п╦я┬п╣ п©я√п╢я┌я─п╦п╪п╨п╟ п©я─п╬я┌п╬п╨п╬п╩я┐ HTTP 1.0. This
 version of ht://Dig has been patched for handling pl chars encoded in
 iso-8859-2.
 
 %package devel
 Summary:	Header files for htdig
-Summary(pl):	Pliki nagЁСwkowe dla htdig
+Summary(pl.UTF-8):   Pliki nagе┌цЁwkowe dla htdig
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains development files for htdig.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nagЁСwkowe htdig.
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagе┌цЁwkowe htdig.
 
 %package static
 Summary:	htdig static libraries
-Summary(pl):	Biblioteki statyczne htdig
+Summary(pl.UTF-8):   Biblioteki statyczne htdig
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 This package contains static libraries of htdig.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki htdig.
 
 %prep
