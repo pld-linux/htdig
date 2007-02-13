@@ -1,10 +1,10 @@
 # TODO: fix --as-needed, remove LDFLAGS hack
 Summary:	A web indexing and searching system for a small domain or intranet
-Summary(es.UTF-8):   Indexador y máquina de búsqueda para web
-Summary(pl.UTF-8):   System indeksowania i przeszukiwania WWW dla małych domen i intranetu
-Summary(pt_BR.UTF-8):   Indexador e máquina de procura para web
-Summary(ru.UTF-8):   Индексирующая система web-поиска для небольших доменов или intranet
-Summary(uk.UTF-8):   Індексуюча система web-пошуку для невеликих доменів чи intranet
+Summary(es.UTF-8):	Indexador y máquina de búsqueda para web
+Summary(pl.UTF-8):	System indeksowania i przeszukiwania WWW dla małych domen i intranetu
+Summary(pt_BR.UTF-8):	Indexador e máquina de procura para web
+Summary(ru.UTF-8):	Индексирующая система web-поиска для небольших доменов или intranet
+Summary(uk.UTF-8):	Індексуюча система web-пошуку для невеликих доменів чи intranet
 Name:		htdig
 Version:	3.2.0b6
 Release:	1
@@ -117,7 +117,7 @@ iso-8859-2.
 
 %package devel
 Summary:	Header files for htdig
-Summary(pl.UTF-8):   Pliki nagłówkowe dla htdig
+Summary(pl.UTF-8):	Pliki nagłówkowe dla htdig
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -129,7 +129,7 @@ Ten pakiet zawiera pliki nagłówkowe htdig.
 
 %package static
 Summary:	htdig static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne htdig
+Summary(pl.UTF-8):	Biblioteki statyczne htdig
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
